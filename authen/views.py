@@ -1,20 +1,24 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import redirect, render
-
+from django.contrib.auth import authenticate
 from authen.forms import RegisterForm
 
 
 # Create your views here.
 def my_login(request):
+    context = {}
     if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user:
             return redirect("index")
-    else:
-        form = AuthenticationForm()
-    return render(request, "authen/login.html", {"form":form})
+        else:
+            context['username'] = username
+            context['password'] = password
+            context['error'] = 'Wrong Username or Password'
+    return render(request, "authen/login.html", context=context)
 def my_register(response):
     if response.method == "POST":
         form = RegisterForm(response.POST)
