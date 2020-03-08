@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+    {% block title %}
+        <title>Login Site!</title>
+    {% endblock %}
+{% block content %}
+    <div class="container">
+        <h4>Login to KOD VOTE System</h4>
+        <br/>
+        <br/>
+        {% comment %} <form method="POST" action="{% url 'index' %}"> {% endcomment %}
+        <form method="POST" class="form-group">
+        {% csrf_token %}
+                {% if error %}
+            <tr><td colspan="2" style="text-align: center;"><span style="color : red;">{{ error }}</span></td></tr>
+        {% endif %} 
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control ml-3" id="username" 
+                    name="username" value="{{ username }}">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control ml-3" id="password" 
+                    name="password" value="{{ password }}">
+            </div>
+            <p>Don't have an account? Create one <a href="/register">here</a></p>
+            <button type="submit" class="btn btn-success ml-3" value="Login">Login</button>
+        </form>
+    </div>
+{% endblock %}

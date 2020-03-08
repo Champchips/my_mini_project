@@ -1,0 +1,52 @@
+<html lang="en">
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}">
+</head>
+
+<body>
+    {% comment %} navigation-bar {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'index' %}"><img src='{% static "my_logo.png" %}' alt="My logo" width=15%></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+    <span class="navbar-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+    </span>
+  </div>
+</nav>
+{% comment %} navigation-bar {% endcomment %}
+<br/><br/>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">
+                {% block footer %}
+                {% endblock %}
+            </span>
+        </div>
+    </footer>
+</body>
+</html>
