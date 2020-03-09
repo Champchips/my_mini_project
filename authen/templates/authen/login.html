@@ -10,9 +10,9 @@
         {% comment %} <form method="POST" action="{% url 'index' %}"> {% endcomment %}
         <form method="POST" class="form-group">
         {% csrf_token %}
-                {% if error %}
+        {% if error %}
             <tr><td colspan="2" style="text-align: center;"><span style="color : red;">{{ error }}</span></td></tr>
-        {% endif %} 
+        {% endif %}
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control ml-3" id="username" 

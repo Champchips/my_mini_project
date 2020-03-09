@@ -5,5 +5,20 @@
 {% endblock %}
 
 {%block content %}
-    Hello
+    <div>
+    <h1>Avaliable</h1>
+    <div style="float: left;">
+        {% for poll_item in poll %}
+        <div style="float: left;">
+            <img src="{{ poll_item.picture.url }}" width= 100px>
+        <br>
+            <b>{{ poll_item.subject }}</b>
+            {{ poll_item.detail }}
+        </div>
+        {% endfor %}
+    </div>
+        </br></br>
+    <div>
+    <h1>Closed</h1>
+    </div>
 {% endblock %}

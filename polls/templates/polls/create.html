@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Create New Poll</title>
+{% endblock %}
+
+{%block content%}
+    <div class="container">
+        <h4>Create New Poll!</h4>
+        <br/>
+        <br/>
+    <form method="POST" class="form-group" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-inline">
+            <label for="subject"> Subject:</label>
+            <input type="text" class="form-control ml-3" id="subject" 
+                name="subject" value="{{ subject }}">
+        </div><br>
+        <div class="form-group">
+        <p>
+            <label for="picture"> Picture: </label>
+            <input id="picture" type="file" class="" name="picture">
+        </p>
+        </div>
+        <div class="form-group">
+            <label for="detail"> Detail:</label>
+            <input type="text" class="form-control ml-3" id="detail" 
+                name="detail" value="{{ detail }}">
+        </div>
+        <div class="form-inline">
+            <label for="password"> Password: </label>
+            <input type="password" class="form-control ml-3" id="password" 
+                name="password" value="{{ password }}">
+        </div><br><br>
+        <button type="submit" class="btn btn-success" value="create">Create</button>
+    </form>
+    </div>
+{% endblock %}

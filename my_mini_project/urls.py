@@ -16,7 +16,8 @@ Including another URLconf
 from django import views
 from django.contrib import admin
 from django.urls import include, path
-
+from django.conf import settings 
+from django.conf.urls.static import static 
 from polls import views as p_views
 from authen import views as a_views
 
@@ -27,5 +28,9 @@ urlpatterns = [
     path('register/', a_views.my_register, name='register'),
     path('index/', p_views.index, name='index'),
     path('polls/', include('polls.urls')),
+    path('logout/', a_views.my_logout, name='logout'),
     # path('', include("django.contrib.auth.urls")),
 ]
+if settings.DEBUG: 
+    urlpatterns += static(settings.MEDIA_URL, 
+    document_root=settings.MEDIA_ROOT)
