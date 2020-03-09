@@ -5,20 +5,44 @@
 {% endblock %}
 
 {%block content %}
-    <div>
-    <h1>Avaliable</h1>
-    <div style="float: left;">
+    <div class="row">
+    <div class="col-9"><h1>Avaliable</h1></div>
         {% for poll_item in poll %}
-        <div style="float: left;">
-            <img src="{{ poll_item.picture.url }}" width= 100px>
-        <br>
-            <b>{{ poll_item.subject }}</b>
-            {{ poll_item.detail }}
-        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+            <img src="{{ poll_item.picture.url }}" class="img-thumbnail">
+            <div class="card-body">
+            <p class="card-text"> <b>{{ poll_item.subject }}</b> <br>
+            {{ poll_item.detail }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Vote</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
         {% endfor %}
     </div>
-        </br></br>
-    <div>
-    <h1>Closed</h1>
-    </div>
+    <div class="row">
+    <div class="col-9"><h1>Closed</h1></div>
+            {% for poll_item in poll %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+            <img src="{{ poll_item.picture.url }}" class="img-thumbnail">
+            <div class="card-body">
+            <p class="card-text"> <b>{{ poll_item.subject }}</b> <br>
+            {{ poll_item.detail }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    <small class="text-danger"><b>Time Out!</b></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
 {% endblock %}

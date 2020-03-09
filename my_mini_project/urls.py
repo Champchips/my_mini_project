@@ -24,7 +24,7 @@ from authen import views as a_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', a_views.my_login, name='login'),
-    path('', a_views.my_register, name='register'),
+    path('', a_views.my_login, name='login'),
     path('register/', a_views.my_register, name='register'),
     path('index/', p_views.index, name='index'),
     path('polls/', include('polls.urls')),
