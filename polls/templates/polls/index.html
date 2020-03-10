@@ -17,14 +17,16 @@
                 {{ poll_item.detail }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Vote</button>
+                          <form method="POST" class="form-group" action="{% url 'poll_views' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="poll_item.id" value="{{ poll_item.id }}">
+                          <button type="submit" class="btn btn-dark btn-sm" value="view">Vote</button></form>
                         </div>
                         {% if 1 == poll_item.duration %}
                         <small class="text-muted">{{poll_item.duration}} min left</small>
                         {% else %}
                         <small class="text-muted">{{poll_item.duration}} mins left</small>
-                        {% endfor %}
+                        {% endif %}
                       </div>
                     </div>
                   </div>
@@ -44,7 +46,10 @@
                 {{ poll_item.detail }}</p>
                 <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <form method="POST" class="form-group" action="{% url 'poll_views' %}">
+                          {% csrf_token %}
+                          <input type="hidden" name="poll_item.id" value="{{ poll_item.id }}">
+                          <button type="submit" class="btn btn-dark btn-sm" value="view">View</button></form>
                         </div>
                       </div>
                     </div>

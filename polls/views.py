@@ -60,3 +60,9 @@ def poll_detail(request):
 @login_required
 def poll_update(request):
     return HttpResponse('Update your Poll')
+@login_required
+def poll_views(request):
+    poll_item = request.POST.get("poll_item.id"," ")
+    poll = Poll.objects.get(pk=poll_item)
+
+    return render(request, 'polls/view.html', {'poll': poll })

@@ -16,7 +16,7 @@ class Poll(models.Model):
         return self.subject
 class Poll_Choice(models.Model):
     subject = models.CharField(max_length=30) 
-    image = models.ImageField()
+    image = models.ImageField(upload_to='choice/%Y/%m/%d')
     poll_id = models.ForeignKey(Poll, on_delete=models.CASCADE)
 class Poll_Vote(models.Model):
     poll_id = models.ForeignKey(Poll, on_delete=models.CASCADE)
