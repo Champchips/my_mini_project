@@ -8,41 +8,48 @@
     <div class="row">
     <div class="col-9"><h1>Avaliable</h1></div>
         {% for poll_item in poll %}
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-            <img src="{{ poll_item.picture.url }}" class="img-thumbnail">
-            <div class="card-body">
-            <p class="card-text"> <b>{{ poll_item.subject }}</b> <br>
-            {{ poll_item.detail }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Vote</button>
+          {% if 0 != poll_item.duration %}
+                <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                <img src="{{ poll_item.picture.url }}" class="img-thumbnail">
+                <div class="card-body">
+                <p class="card-text"> <b>{{ poll_item.subject }}</b> <br>
+                {{ poll_item.detail }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Vote</button>
+                        </div>
+                        {% if 1 == poll_item.duration %}
+                        <small class="text-muted">{{poll_item.duration}} min left</small>
+                        {% else %}
+                        <small class="text-muted">{{poll_item.duration}} mins left</small>
+                        {% endfor %}
+                      </div>
                     </div>
-                    <small class="text-muted">9 mins</small>
                   </div>
                 </div>
-              </div>
-            </div>
+          {% endif %}
         {% endfor %}
     </div>
     <div class="row">
     <div class="col-9"><h1>Closed</h1></div>
             {% for poll_item in poll %}
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-            <img src="{{ poll_item.picture.url }}" class="img-thumbnail">
-            <div class="card-body">
-            <p class="card-text"> <b>{{ poll_item.subject }}</b> <br>
-            {{ poll_item.detail }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+              {% if 0 == poll_item.duration %}
+                <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                <img src="{{ poll_item.picture.url }}" class="img-thumbnail">
+                <div class="card-body">
+                <p class="card-text"> <b>{{ poll_item.subject }}</b> <br>
+                {{ poll_item.detail }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                        </div>
+                      </div>
                     </div>
-                    <small class="text-danger"><b>Time Out!</b></small>
                   </div>
                 </div>
-              </div>
-            </div>
+              {% endif %}
         {% endfor %}
 {% endblock %}

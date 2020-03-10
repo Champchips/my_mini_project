@@ -15,16 +15,26 @@ from polls.models import Poll, Poll_Choice, Poll_Vote
 # Create your views here.
 @login_required
 def index(request):
-    # if start_date - current_date < 0:
+    context = {}
     poll = Poll.objects.all()
-    p = Poll.objects.get(subject="l")
-    diff = p.end_date - p.create_date
-    seconds_in_day = 24 * 60 * 60
-    print(p.end_date)
-    print(p.create_date)
-    print(divmod(diff.days * seconds_in_day + diff.seconds, 60)[0], divmod(diff.days * seconds_in_day + diff.seconds, 60)[1])
+    for single_poll in poll:
+        new_end_date = single_poll.end_date.replace(tzinfo=None)
+        new_start_date = single_poll.start_date.replace(tzinfo=None)
+        seconds_in_day = 24 * 60 * 60
+        diff_end_date =  new_end_date - datetime.datetime.now()
+        diff_start_date =  new_start_date - datetime.datetime.now()
+        result_end_date = divmod(diff_end_date.days * seconds_in_day + diff_end_date.seconds, 60)[0]
+        result_start_date = divmod(diff_start_date.days * seconds_in_day + diff_start_date.seconds, 60)[0]
+        if result_start_date > 0:
+            single_poll.duration = 0
+        elif result_start_date < 0 and result_end_date > 0:
+            single_poll.duration = result_end_date
+        elif result_end_date < 0:
+            single_poll.duration = 0
+        single_poll.save()
+    context['poll'] = poll
     if request.user.is_authenticated:
-        return render(request, 'polls/index.html', { 'poll':poll })
+        return render(request, 'polls/index.html', context=context)
     else:
         return redirect('login')
 @login_required
