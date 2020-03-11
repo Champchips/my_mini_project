@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}
+<title>Poll's {{poll.create_by.username}} </title>
 {% endblock %}
 {% block content %}
-    <p>{{ poll.subject }}</p>
+    <h4>{{ poll.subject }}</h4><br>
+    <p> Start Date: {{poll.start_date}} </p>
+    <p> End Date: {{poll.end_date}} </p>
 {% endblock %}

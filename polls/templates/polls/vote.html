@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Vote Poll</title>
+{% endblock %}
+{% block content %}
+    <h2>{{ poll.subject }}</h2><br>
+    <h3>{{ poll.detail }}</h3><br>
+<h4>Choice</h4><br>
+<div class="row">
+        {% for ch in choice %}
+            {% if ch.poll_id_id == poll.id %}
+                <div class="col-md-2">
+                <div class="card mb-3 box-shadow">
+                <img src="{{ ch.image.url }}" style="max-height: 100px; max-width: 200px;">
+                <div class="card-body">
+                <p class="card-text"> <b>{{ ch.subject }}</b> <br>
+                <div class="d-flex justify-content-between align-items-center">
+                        <form method="POST" class="form-group" action="{% url 'vote_poll' poll_id=poll.id choice_id=ch.id%}">
+                        <div class="btn-group">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm" name="vote">Vote</button></form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+</div>
+{% endblock %}
